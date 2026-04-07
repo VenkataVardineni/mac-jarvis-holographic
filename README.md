@@ -4,6 +4,7 @@
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
 ![Three.js](https://img.shields.io/badge/Three.js-black?logo=threedotjs&logoColor=white)
 ![License](https://img.shields.io/badge/license-MIT-green)
+[![CI](https://github.com/VenkataVardineni/mac-jarvis-holographic/actions/workflows/ci.yml/badge.svg)](https://github.com/VenkataVardineni/mac-jarvis-holographic/actions/workflows/ci.yml)
 
 Browser-based **“holographic”** workspace built with **React**, **Three.js**, **React Three Fiber**, and **MediaPipe Hand Landmarker**. You control a **wireframe-style** 3D assembly with **fists** while the model stays **locked to the camera viewport** (OrbitControls still moves the world; the hologram rides with the view).
 
@@ -77,3 +78,7 @@ public/
 ## License
 
 MIT — see [LICENSE](./LICENSE).
+
+## Continuous integration
+
+GitHub Actions runs `npm ci`, `npm run lint`, and `npm run build` on push and pull requests (see `.github/workflows/ci.yml`).
