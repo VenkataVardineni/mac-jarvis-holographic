@@ -1,0 +1,79 @@
+# Mac Jarvis — Holographic spatial UI
+
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
+![Three.js](https://img.shields.io/badge/Three.js-black?logo=threedotjs&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-green)
+
+Browser-based **“holographic”** workspace built with **React**, **Three.js**, **React Three Fiber**, and **MediaPipe Hand Landmarker**. You control a **wireframe-style** 3D assembly with **fists** while the model stays **locked to the camera viewport** (OrbitControls still moves the world; the hologram rides with the view).
+
+## Features
+
+- **Two-hand fist tracking** with cyan / pink markers (left / right when MediaPipe labels hands; fallback by detection slot).
+- **One closed fist**: move the assembly (delta projected on camera right / up / forward).
+- **Two closed fists**: zoom by changing the distance between palms.
+- **GLB / GLTF** hologram loader (Draco + Meshopt) plus built-in procedural blueprints (`car`, `truck`, `robot`, `plane`, `engine`).
+- **Zustand** for hand + assembly state; hidden webcam for vision only.
+
+## Requirements
+
+- **Node.js 20+** (LTS recommended)
+- **HTTPS or localhost** for camera access
+- A **GPU** helps MediaPipe WASM; CPU delegate is used as fallback
+
+## Scripts
+
+| Command        | Description                          |
+| -------------- | ------------------------------------ |
+| `npm install`  | Install dependencies                 |
+| `npm run dev`  | Vite dev server (with network host)  |
+| `npm run build`| Typecheck + production build         |
+| `npm run preview` | Serve `dist/`                     |
+| `npm run lint` | ESLint                               |
+| `npm run typecheck` | `tsc -b` only (no emit)        |
+
+## Quick start
+
+```bash
+npm install
+npm run dev
+```
+
+Open the printed URL, allow **camera**, type `car` and **Load**, or load a `.glb` from `public/models/` via `/models/yourfile.glb`.
+
+### Optional local models
+
+Place files under `public/models/`. Large `.glb` files are **gitignored** by default; keep them on your machine or use Git LFS if you need them in a remote repo.
+
+## Project layout
+
+```
+src/
+  components/   # R3F scene, vision driver, UI bar, GLTF hologram
+  data/           # Procedural part defs + object catalog
+  hooks/          # (reserved)
+  lib/            # Coords, gestures, fist detection, vision URLs
+  stores/         # Zustand spatial store
+public/
+  models/         # Your .glb assets (not committed if large)
+```
+
+## Architecture (short)
+
+- **Canvas** (`SpatialScene`): `PerspectiveCamera`, `OrbitControls`, `HandVisionDriver` (MediaPipe on `<video>`), `CameraAttachedRig` parents the pick/model group to the **camera** so content stays screen-stable.
+- **Hands → store**: `HandVisionDriver` runs `detectForVideo` once per new video frame with monotonic timestamps; `HandInteraction` reads `assemblyPosition`, `assemblyRotation`, `assemblyScale` from Zustand.
+- **Fists**: `lib/handGestureDetect.ts` uses 2D landmark distances + curl heuristics; markers in `FistMarkers.tsx`.
+
+## Troubleshooting
+
+| Issue | What to try |
+| ----- | ----------- |
+| Camera blocked | Use **localhost** or **HTTPS**; check browser site permissions. |
+| No hand / no dots | Lighting and contrast; keep hands in frame; try slower movement. |
+| MediaPipe timestamp errors | App gates inference to `video.currentTime` changes and monotonic `performance.now()`. Hard-refresh if WASM graph desyncs. |
+| Black or missing GLB | Use valid `.glb` / `.gltf`; for skinned cars the loader keeps the whole scene (see `GltfHologram.tsx`). |
+| Dots wrong left/right | Mirror selfie view can swap MediaPipe handedness; colors are best-effort with slot fallback. |
+
+## License
+
+MIT — see [LICENSE](./LICENSE).
