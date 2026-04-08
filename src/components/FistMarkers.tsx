@@ -5,12 +5,12 @@ import { HAND_ORBIT_TARGET, normToWorldAtFocusPlane } from '../lib/coords'
 import { handByLabel } from '../lib/handLabels'
 import type { HandFrame } from '../stores/spatialStore'
 import { useSpatialStore } from '../stores/spatialStore'
-
-const NZ_SCALE = 0.35
-const DOT_R = 0.028
-
-const LEFT_COLOR = '#44ddff'
-const RIGHT_COLOR = '#ff66aa'
+import {
+  FIST_DOT_RADIUS,
+  FIST_MARKER_NZ_SCALE,
+  LEFT_FIST_COLOR,
+  RIGHT_FIST_COLOR,
+} from '../lib/markerConstants'
 
 const prevLeft = new THREE.Vector3()
 const prevRight = new THREE.Vector3()
@@ -50,7 +50,7 @@ export function FistMarkers() {
           w.y,
           w.z,
           HAND_ORBIT_TARGET,
-          NZ_SCALE,
+          FIST_MARKER_NZ_SCALE,
           tmp,
           meshL.visible ? prevLeft : null
         )
@@ -72,7 +72,7 @@ export function FistMarkers() {
           w.y,
           w.z,
           HAND_ORBIT_TARGET,
-          NZ_SCALE,
+          FIST_MARKER_NZ_SCALE,
           tmp,
           meshR.visible ? prevRight : null
         )
@@ -88,18 +88,18 @@ export function FistMarkers() {
   return (
     <group renderOrder={1000}>
       <mesh ref={leftRef} visible={false}>
-        <sphereGeometry args={[DOT_R, 12, 12]} />
+        <sphereGeometry args={[FIST_DOT_RADIUS, 12, 12]} />
         <meshBasicMaterial
-          color={LEFT_COLOR}
+          color={LEFT_FIST_COLOR}
           depthTest={true}
           depthWrite={false}
           toneMapped={false}
         />
       </mesh>
       <mesh ref={rightRef} visible={false}>
-        <sphereGeometry args={[DOT_R, 12, 12]} />
+        <sphereGeometry args={[FIST_DOT_RADIUS, 12, 12]} />
         <meshBasicMaterial
-          color={RIGHT_COLOR}
+          color={RIGHT_FIST_COLOR}
           depthTest={true}
           depthWrite={false}
           toneMapped={false}
