@@ -82,3 +82,10 @@ MIT — see [LICENSE](./LICENSE).
 ## Continuous integration
 
 GitHub Actions runs `npm ci`, `npm run lint`, and `npm run build` on push and pull requests (see `.github/workflows/ci.yml`).
+
+## Repository
+
+```bash
+git clone https://github.com/VenkataVardineni/mac-jarvis-holographic.git
+cd mac-jarvis-holographic
+```
