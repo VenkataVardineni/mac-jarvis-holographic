@@ -10,8 +10,11 @@ if [[ -d .git ]]; then
 fi
 
 git init -b main
-git config user.email "dev@local"
-git config user.name "Mac Jarvis"
+# GitHub contributions only count commits whose author email is on your GitHub account
+# (verified address or ID+username@users.noreply.github.com — see github.com/settings/emails).
+: "${GIT_AUTHOR_EMAIL:?Set GIT_AUTHOR_EMAIL before running (e.g. your GitHub noreply email)}"
+git config user.email "$GIT_AUTHOR_EMAIL"
+git config user.name "${GIT_AUTHOR_NAME:-$(git config --global user.name 2>/dev/null || echo Developer)}"
 
 c() {
   git add "$@"
