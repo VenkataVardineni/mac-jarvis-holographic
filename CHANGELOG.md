@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased]
+
+- Docs, GitHub templates, constants extraction, and tooling.
+
 ## [0.1.0] — 2026-04-07
 
 - Holographic spatial UI with React, Three.js, React Three Fiber, Zustand.
