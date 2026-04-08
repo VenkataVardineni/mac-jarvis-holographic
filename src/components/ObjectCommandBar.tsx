@@ -1,12 +1,10 @@
 import { useCallback, useRef, useState } from 'react'
 import { resolveBlueprintName } from '../data/objectCatalog'
 import { useSpatialStore } from '../stores/spatialStore'
-
-const hint =
-  'Fists only: cyan dot = your left fist, pink = right (when closed). One fist moves the model; both fists at once zoom in/out by spreading or bringing them together.'
-
-const photoMessage =
-  'This is a photo or image, not a 3D model. The app cannot turn pictures into holograms. Use: (1) Type car and Load for a built-in wireframe car, or (2) Get a .glb file — export from Blender, or download from Sketchfab / Google Poly-style archives (check license).'
+import {
+  COMMAND_BAR_FIST_HINT,
+  COMMAND_BAR_PHOTO_WARNING,
+} from '../lib/commandBarStrings'
 
 function isImageFile(file: File): boolean {
   if (file.type.startsWith('image/')) return true
@@ -64,7 +62,7 @@ export function ObjectCommandBar() {
       if (!file) return
 
       if (isImageFile(file)) {
-        setNotice({ text: photoMessage, tone: 'error' })
+        setNotice({ text: COMMAND_BAR_PHOTO_WARNING, tone: 'error' })
         return
       }
 
@@ -204,7 +202,7 @@ export function ObjectCommandBar() {
           color: 'rgba(200, 220, 255, 0.45)',
         }}
       >
-        {hint}
+        {COMMAND_BAR_FIST_HINT}
       </p>
       <p
         style={{
