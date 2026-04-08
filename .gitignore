@@ -29,3 +29,7 @@ dist-ssr
 # Large 3D assets (keep models locally; see README)
 public/models/*.glb
 public/models/*.gltf
+
+# Unused default Vite starter paths
+src/App.css
+src/assets/
