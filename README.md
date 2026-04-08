@@ -120,3 +120,7 @@ In another terminal you can run `npm run lint` or `npm run typecheck` while iter
 
 - [Three.js](https://threejs.org/) and [React Three Fiber](https://docs.pmnd.rs/react-three-fiber/) for rendering.
 - [MediaPipe](https://developers.google.com/mediapipe) Hand Landmarker for in-browser tracking.
+
+### Keeping large models private
+
+`.glb` / `.gltf` files under `public/models/` are ignored by Git by default so clones stay small. Share assets via your own storage, Git LFS, or release attachments—not required for the app to run (built-in blueprints still work).
