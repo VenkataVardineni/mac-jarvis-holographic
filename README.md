@@ -102,3 +102,7 @@ This repo keeps **incremental commits** on `main` (no squash-only workflow requi
 ## Browser support
 
 Use a current **Chrome**, **Edge**, or **Firefox** with WebGL2 and `getUserMedia`. Safari often works on recent versions; test camera permissions on real devices.
+
+## Environment variables
+
+There are no required env vars today. See [`.env.example`](./.env.example) for reserved Vite-style placeholders if you extend the app.
