@@ -115,3 +115,8 @@ npm run dev
 ```
 
 In another terminal you can run `npm run lint` or `npm run typecheck` while iterating.
+
+## Acknowledgements
+
+- [Three.js](https://threejs.org/) and [React Three Fiber](https://docs.pmnd.rs/react-three-fiber/) for rendering.
+- [MediaPipe](https://developers.google.com/mediapipe) Hand Landmarker for in-browser tracking.
