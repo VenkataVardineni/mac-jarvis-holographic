@@ -98,3 +98,7 @@ git fetch origin
 ```
 
 This repo keeps **incremental commits** on `main` (no squash-only workflow required to see them).
+
+## Browser support
+
+Use a current **Chrome**, **Edge**, or **Firefox** with WebGL2 and `getUserMedia`. Safari often works on recent versions; test camera permissions on real devices.
