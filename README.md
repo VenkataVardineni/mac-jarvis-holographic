@@ -106,3 +106,12 @@ Use a current **Chrome**, **Edge**, or **Firefox** with WebGL2 and `getUserMedia
 ## Environment variables
 
 There are no required env vars today. See [`.env.example`](./.env.example) for reserved Vite-style placeholders if you extend the app.
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+In another terminal you can run `npm run lint` or `npm run typecheck` while iterating.
