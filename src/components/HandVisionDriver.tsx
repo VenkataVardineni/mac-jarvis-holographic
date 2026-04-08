@@ -19,11 +19,12 @@ import {
   HAND_LANDMARKER_MODEL_URL,
   MEDIAPIPE_WASM_CDN,
 } from '../lib/visionConstants'
+import {
+  HAND_NZ_WORLD_SCALE,
+  PALM_WORLD_SMOOTH,
+} from '../lib/visionDriverConstants'
 import type { HandFrame } from '../stores/spatialStore'
 import { useSpatialStore } from '../stores/spatialStore'
-
-const NZ_WORLD_SCALE = 0.35
-const PALM_SMOOTH = 0.34
 
 function handednessLabel(
   result: HandLandmarkerResult,
@@ -80,7 +81,7 @@ function buildHandFrame(
     wrist.y,
     palmZ,
     HAND_ORBIT_TARGET,
-    NZ_WORLD_SCALE,
+    HAND_NZ_WORLD_SCALE,
     tracked.rawPalmWorld,
     fallback
   )
@@ -88,7 +89,7 @@ function buildHandFrame(
   if (tracked.prevTime === 0) {
     tracked.smoothedPalmWorld.copy(tracked.rawPalmWorld)
   } else {
-    tracked.smoothedPalmWorld.lerp(tracked.rawPalmWorld, PALM_SMOOTH)
+    tracked.smoothedPalmWorld.lerp(tracked.rawPalmWorld, PALM_WORLD_SMOOTH)
   }
 
   const now = performance.now()
