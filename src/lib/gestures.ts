@@ -1,3 +1,4 @@
+/** Pinch distance math and hysteresis for optional pinch UX. */
 import * as THREE from 'three'
 
 /** Hysteresis: avoids pinch flicker when fingertip distance hovers near the threshold. */
