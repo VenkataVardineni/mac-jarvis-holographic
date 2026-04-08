@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 - Docs, GitHub templates, constants extraction, and tooling.
+- Shared libs: cameraConstraints, visionDriverConstants, markerConstants, handInteractionConstants, commandBarStrings.
 
 ## [0.1.0] — 2026-04-07
 
