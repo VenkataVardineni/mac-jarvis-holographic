@@ -2,9 +2,12 @@ import { useMemo, useRef } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 import { useSpatialStore } from '../stores/spatialStore'
-
-const ZOOM_MIN = 0.25
-const ZOOM_MAX = 5
+import {
+  ASSEMBLY_ZOOM_MAX,
+  ASSEMBLY_ZOOM_MIN,
+  TWO_FIST_DEFAULT_REF_DIST,
+  TWO_FIST_MIN_START_DIST,
+} from '../lib/handInteractionConstants'
 
 type Props = {
   /** Reserved for future ray-pick UX; scene is fist-driven only. */
@@ -27,7 +30,7 @@ export function HandInteraction({ engineRootRef }: Props) {
   })
   const twoFistSession = useRef({
     active: false,
-    startDist: 0.12,
+    startDist: TWO_FIST_DEFAULT_REF_DIST,
     startScale: 1,
   })
 
@@ -54,14 +57,14 @@ export function HandInteraction({ engineRootRef }: Props) {
       const tf = twoFistSession.current
       if (!tf.active) {
         tf.active = true
-        tf.startDist = Math.max(dist, 0.06)
+        tf.startDist = Math.max(dist, TWO_FIST_MIN_START_DIST)
         tf.startScale = st.assemblyScale
       }
       const ratio = dist / Math.max(tf.startDist, 0.001)
       const next = THREE.MathUtils.clamp(
         tf.startScale * ratio,
-        ZOOM_MIN,
-        ZOOM_MAX
+        ASSEMBLY_ZOOM_MIN,
+        ASSEMBLY_ZOOM_MAX
       )
       useSpatialStore.getState().setAssemblyScale(next)
     } else {
