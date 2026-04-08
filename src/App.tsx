@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { SpatialScene } from './components/SpatialScene'
 import { ObjectCommandBar } from './components/ObjectCommandBar'
+import {
+  VISION_VIDEO_LAYOUT,
+  VISION_VIDEO_NATIVE,
+  WEBCAM_VIDEO_CONSTRAINTS,
+} from './lib/cameraConstraints'
 
 function App() {
   const videoRef = useRef<HTMLVideoElement | null>(null)
@@ -12,11 +17,7 @@ function App() {
     ;(async () => {
       try {
         const s = await navigator.mediaDevices.getUserMedia({
-          video: {
-            facingMode: 'user',
-            width: { ideal: 1280 },
-            height: { ideal: 720 },
-          },
+          video: WEBCAM_VIDEO_CONSTRAINTS,
           audio: false,
         })
         if (!active) {
@@ -52,8 +53,8 @@ function App() {
       <ObjectCommandBar />
       <video
         ref={videoRef}
-        width={1280}
-        height={720}
+        width={VISION_VIDEO_NATIVE.width}
+        height={VISION_VIDEO_NATIVE.height}
         muted
         playsInline
         autoPlay
@@ -61,8 +62,8 @@ function App() {
           position: 'fixed',
           left: 0,
           top: 0,
-          width: 640,
-          height: 480,
+          width: VISION_VIDEO_LAYOUT.width,
+          height: VISION_VIDEO_LAYOUT.height,
           opacity: 0,
           pointerEvents: 'none',
           zIndex: -1,
