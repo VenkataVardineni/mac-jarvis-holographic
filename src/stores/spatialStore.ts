@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import * as THREE from 'three'
+import { DEFAULT_ASSEMBLY_SCALE } from '../lib/assemblyConstants'
 import type { PartDef } from '../data/volumeParts'
 
 export {
@@ -76,7 +77,7 @@ const emptyBlueprintState = () => ({
   grabbedPartId: null,
   grabbedByHandIndex: null as 0 | 1 | null,
   grabOffset: new THREE.Vector3(),
-  assemblyScale: 1,
+  assemblyScale: DEFAULT_ASSEMBLY_SCALE,
   assemblyPosition: new THREE.Vector3(0, 0, 0),
   assemblyRotation: new THREE.Quaternion(),
   detachedPartIds: new Set<string>(),
