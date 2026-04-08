@@ -1,3 +1,4 @@
+/** Hand landmark → Three.js world mapping helpers (camera ray + focus plane). */
 import * as THREE from 'three'
 
 /**
