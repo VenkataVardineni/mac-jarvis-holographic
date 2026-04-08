@@ -89,3 +89,12 @@ GitHub Actions runs `npm ci`, `npm run lint`, and `npm run build` on push and pu
 git clone https://github.com/VenkataVardineni/mac-jarvis-holographic.git
 cd mac-jarvis-holographic
 ```
+
+If the history looks short in your Git UI, confirm locally:
+
+```bash
+git log --oneline | wc -l
+git fetch origin
+```
+
+This repo keeps **incremental commits** on `main` (no squash-only workflow required to see them).
