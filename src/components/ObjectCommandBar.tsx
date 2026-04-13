@@ -5,6 +5,7 @@ import {
   COMMAND_BAR_FIST_HINT,
   COMMAND_BAR_PHOTO_WARNING,
 } from '../lib/commandBarStrings'
+import { isLikelyHostedModelPath } from '../lib/modelUrl'
 
 function isImageFile(file: File): boolean {
   if (file.type.startsWith('image/')) return true
@@ -34,7 +35,7 @@ export function ObjectCommandBar() {
 
   const submit = useCallback(() => {
     const t = value.trim()
-    if (/\.(glb|gltf)$/i.test(t) && (t.startsWith('/') || /^https?:\/\//i.test(t))) {
+    if (isLikelyHostedModelPath(t)) {
       revokeBlob()
       loadGltf(t)
       setNotice({ text: `Loading model from ${t}`, tone: 'info' })
@@ -139,6 +140,7 @@ export function ObjectCommandBar() {
         <button
           type="button"
           onClick={submit}
+          aria-label="Load blueprint name or model URL"
           style={{
             padding: '10px 14px',
             borderRadius: 8,
@@ -155,6 +157,7 @@ export function ObjectCommandBar() {
       </div>
 
       <label
+        aria-label="Load 3D model file from disk"
         style={{
           display: 'block',
           padding: '10px 12px',
@@ -171,6 +174,7 @@ export function ObjectCommandBar() {
           type="file"
           accept=".glb,.gltf,model/gltf-binary,model/gltf+json"
           onChange={onGltfFile}
+          aria-label="Choose GLB or GLTF file"
           style={{ display: 'none' }}
         />
         Load 3D file (.glb / .gltf only — not photos)
@@ -180,6 +184,7 @@ export function ObjectCommandBar() {
         <button
           type="button"
           onClick={clearScene}
+          aria-label="Clear loaded blueprint or model"
           style={{
             alignSelf: 'flex-end',
             padding: '6px 10px',
@@ -218,6 +223,8 @@ export function ObjectCommandBar() {
       </p>
       {notice && (
         <p
+          role="status"
+          aria-live="polite"
           style={{
             margin: 0,
             fontSize: 12,
