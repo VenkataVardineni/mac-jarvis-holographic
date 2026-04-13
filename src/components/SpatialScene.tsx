@@ -9,6 +9,20 @@ import { FistMarkers } from './FistMarkers'
 import { HandInteraction } from './HandInteraction'
 import { CameraAttachedRig } from './CameraAttachedRig'
 import { HandVisionDriver } from './HandVisionDriver'
+import {
+  SCENE_CAMERA_FAR,
+  SCENE_CAMERA_FOV,
+  SCENE_CAMERA_NEAR,
+} from '../lib/sceneCameraConstants'
+import {
+  ORBIT_DAMPING,
+  ORBIT_MAX_DISTANCE,
+  ORBIT_MAX_POLAR,
+  ORBIT_MIN_DISTANCE,
+  ORBIT_MIN_POLAR,
+  ORBIT_ROTATE_SPEED,
+  ORBIT_TARGET,
+} from '../lib/sceneControlsConstants'
 
 type Props = {
   videoRef: RefObject<HTMLVideoElement | null>
@@ -36,18 +50,24 @@ function SceneInner({ videoRef }: Props) {
 
   return (
     <>
-      <PerspectiveCamera makeDefault position={[0, 0, 4]} fov={50} near={0.1} far={80} />
+      <PerspectiveCamera
+        makeDefault
+        position={[0, 0, 4]}
+        fov={SCENE_CAMERA_FOV}
+        near={SCENE_CAMERA_NEAR}
+        far={SCENE_CAMERA_FAR}
+      />
       <OrbitControls
         makeDefault
         enableDamping
-        dampingFactor={0.06}
-        target={[0, 0.14, 0]}
-        minPolarAngle={0.05}
-        maxPolarAngle={Math.PI - 0.05}
-        minDistance={1.85}
-        maxDistance={16}
+        dampingFactor={ORBIT_DAMPING}
+        target={ORBIT_TARGET}
+        minPolarAngle={ORBIT_MIN_POLAR}
+        maxPolarAngle={ORBIT_MAX_POLAR}
+        minDistance={ORBIT_MIN_DISTANCE}
+        maxDistance={ORBIT_MAX_DISTANCE}
         enablePan
-        rotateSpeed={0.65}
+        rotateSpeed={ORBIT_ROTATE_SPEED}
         zoomSpeed={0.7}
       />
       <HandVisionDriver videoRef={videoRef} />
