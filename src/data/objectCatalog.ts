@@ -302,6 +302,9 @@ const ALIASES: Record<string, string> = {
   block: 'engine',
 }
 
+/** Canonical blueprint keys (aliases resolve into these). */
+export const CATALOG_PRIMARY_IDS = ['car', 'truck', 'robot', 'plane', 'engine'] as const
+
 export type ResolvedBlueprint = { id: string; parts: PartDef[] }
 
 export function resolveBlueprintName(raw: string): ResolvedBlueprint | null {
