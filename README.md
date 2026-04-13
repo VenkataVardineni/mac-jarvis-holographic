@@ -13,7 +13,7 @@ Browser-based **“holographic”** workspace built with **React**, **Three.js**
 - **Two-hand fist tracking** with cyan / pink markers (left / right when MediaPipe labels hands; fallback by detection slot).
 - **One closed fist**: move the assembly (delta projected on camera right / up / forward).
 - **Two closed fists**: zoom by changing the distance between palms.
-- **GLB / GLTF** hologram loader (Draco + Meshopt) plus built-in procedural blueprints (`car`, `truck`, `robot`, `plane`, `engine`).
+- **GLB / GLTF** hologram loader (Draco + Meshopt) plus built-in procedural blueprints (`car`, `truck`, `robot`, `plane`, `engine` — see `CATALOG_PRIMARY_IDS` in `objectCatalog.ts`).
 - **Zustand** for hand + assembly state; hidden webcam for vision only.
 
 ## Requirements
@@ -32,6 +32,10 @@ Browser-based **“holographic”** workspace built with **React**, **Three.js**
 | `npm run preview` | Serve `dist/`                     |
 | `npm run lint` | ESLint                               |
 | `npm run typecheck` | `tsc -b` only (no emit)        |
+| `npm run test` | Vitest unit tests (single run)      |
+| `npm run test:watch` | Vitest watch mode           |
+
+More detail: [docs/TESTING.md](./docs/TESTING.md).
 
 ## Quick start
 
