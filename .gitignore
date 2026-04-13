@@ -26,6 +26,9 @@ dist-ssr
 # Build caches
 *.tsbuildinfo
 
+# Vitest
+coverage
+
 # Large 3D assets (keep models locally; see README)
 public/models/*.glb
 public/models/*.gltf
